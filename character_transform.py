@@ -22,6 +22,8 @@ import os
 
 ROOT = './zimu_cleaned'
 
+INDEX = 0
+
 for root, dirs, files in os.walk(ROOT):
     for file_name in files:
         file_path = root + "/" + file_name
@@ -34,8 +36,10 @@ for root, dirs, files in os.walk(ROOT):
             try:
                 gb_content = data.decode("gb18030")
                 gb_content.encode('utf-8')
-                f = open(file_path, 'w')
                 f.write(gb_content.encode('utf-8'))
-                f.close()
+                INDEX += 1
+                print "Index: " + INDEX
             except:
                 print "except:", file_path
+            finally:
+                f.close()
