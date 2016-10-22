@@ -19,6 +19,10 @@
 
 import chardet
 import os
+import commands
+import logging
+
+logging.basicConfig(filename='character.log', level=logging.DEBUG)
 
 ROOT = './zimu_cleaned'
 
@@ -27,19 +31,14 @@ INDEX = 0
 for root, dirs, files in os.walk(ROOT):
     for file_name in files:
         file_path = root + "/" + file_name
+        out_path = './zimu_utf8/' + file_name
         f = open(file_path, 'r')
         data = f.read()
-        f.close()
         encoding = chardet.detect(data)["encoding"]
+        f.close()
 
-        if encoding not in ("UTF-8-SIG", "UTF-16LE", "utf-8", "ascii"):
-            try:
-                gb_content = data.decode("gb18030")
-                gb_content.encode('utf-8')
-                f.write(gb_content.encode('utf-8'))
-                INDEX += 1
-                print "Index: " + INDEX
-            except:
-                print "except:", file_path
-            finally:
-                f.close()
+        code, msg = commands.getstatusoutput('icon -f %s -t UTF-8 -o %s %s' % (encoding, out_path, file_path))
+
+        if code != 0:
+            print 'Except: %s' % (file_path)
+            logging.error(msg)
