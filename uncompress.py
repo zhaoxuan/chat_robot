@@ -39,7 +39,7 @@ def uncompress(file_name):
     file_path = pipes.quote(ROOT + '/result/' + file_name)
 
     if extension.lower() == '.zip':
-        code, msg = commands.getstatusoutput('unzip -o %s -d %s' % (file_path, OUT_PUT))
+        code, msg = commands.getstatusoutput('7z x %s -yo%s' % (file_path, OUT_PUT))
         if code != 0:
             print file_path
             logging.error(msg)
