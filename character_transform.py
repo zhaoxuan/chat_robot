@@ -37,7 +37,7 @@ for root, dirs, files in os.walk(ROOT):
         encoding = chardet.detect(data)["encoding"]
         f.close()
 
-        code, msg = commands.getstatusoutput('icon -f %s -t UTF-8 -o %s %s' % (encoding, out_path, file_path))
+        code, msg = commands.getstatusoutput('iconv -f %s -t UTF-8 -o %s %s' % (encoding, out_path, file_path))
 
         if code != 0:
             print 'Except: %s' % (file_path)
