@@ -21,12 +21,13 @@
 import os
 import commands
 import logging
+import pipes
 
 """
 解压目录里面的字幕
 """
 
-ROOT = '/Users/john/workspaces/python/zimuku_crawl'
+ROOT = '/mnt/sdd1/chat_robot'
 OUT_PUT = ROOT + '/zimu_text/'
 logging.basicConfig(filename='uncompress.log', level=logging.DEBUG)
 status, output = commands.getstatusoutput('ls result/')
@@ -35,19 +36,22 @@ status, output = commands.getstatusoutput('ls result/')
 def uncompress(file_name):
     name, extension = os.path.splitext(file_name)
 
-    file_path = ROOT + '/result/' + file_name
+    file_path = pipes.quote(ROOT + '/result/' + file_name)
 
     if extension.lower() == '.zip':
         code, msg = commands.getstatusoutput('unzip -o \'%s\' -d %s' % (file_path, OUT_PUT))
         if code != 0:
-            logging.info(file_name)
+            print file_path
+            logging.error(msg)
         pass
     elif extension.lower() == '.rar':
         code, msg = commands.getstatusoutput('unrar x -y \'%s\' %s' % (file_path, OUT_PUT))
         if code != 0:
-            logging.info(file_name)
+            print file_path
+            logging.error(msg)
         pass
     else:
+        print file_path
         pass
 
 
