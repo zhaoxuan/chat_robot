@@ -44,16 +44,14 @@ def uncompress(file_name):
             print file_path
             logging.error(msg)
         else:
-            COUNTER += 1
-            print COUNTER
+            print 'success'
     elif extension.lower() == '.rar':
         code, msg = commands.getstatusoutput('7z x %s -yo%s' % (file_path, OUT_PUT))
         if code != 0:
             print file_path
             logging.error(msg)
         else:
-            COUNTER += 1
-            print COUNTER
+            print 'success'
     else:
         print file_path
         pass
