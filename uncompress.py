@@ -30,7 +30,7 @@ import pipes
 ROOT = '/mnt/sdd1/chat_robot'
 OUT_PUT = ROOT + '/zimu_text/'
 logging.basicConfig(filename='uncompress.log', level=logging.DEBUG)
-status, output = commands.getstatusoutput('ls result/')
+COUNTER = 1
 
 
 def uncompress(file_name):
@@ -43,17 +43,22 @@ def uncompress(file_name):
         if code != 0:
             print file_path
             logging.error(msg)
-        pass
+        else:
+            COUNTER += 1
+            print COUNTER
     elif extension.lower() == '.rar':
         code, msg = commands.getstatusoutput('7z x %s -yo%s' % (file_path, OUT_PUT))
         if code != 0:
             print file_path
             logging.error(msg)
-        pass
+        else:
+            COUNTER += 1
+            print COUNTER
     else:
         print file_path
         pass
 
 
-for file_name in output.split('\n'):
-    uncompress(file_name)
+for root, dirs, files in os.walk(ROOT + '/result'):
+    for file_name in files:
+        uncompress(file_name)
