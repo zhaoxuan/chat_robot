@@ -29,7 +29,11 @@ for root, dirs, files in os.walk(path):
     for file_name in files:
         name, extension = os.path.splitext(file_name)
 
-        if extension.lower() in ['.txt', '.srt', '.ass', '.ssa']:
+        if extension.lower() in ['.txt', '.srt', '.ass', '.ssa', '.lrc']:
             old_file = root + '/' + file_name
             new_file = './zimu_cleaned/' + file_name
-            os.rename(old_file, new_file)
+            try:
+                os.copy(old_file, new_file)
+            except Exception as e:
+                logging.error(str(e))
+                logging.info()

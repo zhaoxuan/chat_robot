@@ -20,6 +20,7 @@
 import os
 import commands
 import logging
+import pipes
 
 logging.basicConfig(filename='file2unix.log', level=logging.DEBUG)
 ROOT = './zimu_cleaned'
@@ -27,7 +28,7 @@ ROOT = './zimu_cleaned'
 for root, dirs, files in os.walk(ROOT):
     for file_name in files:
         file_path = root + "/" + file_name
-        code, msg = commands.getstatusoutput('dos2unix \'%s\'' % (file_path))
+        code, msg = commands.getstatusoutput('dos2unix \'%s\'' % (pipes.quote(file_path)))
         if code != 0:
             print file_path
             logging.error(msg)
