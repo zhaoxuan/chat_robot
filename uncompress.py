@@ -27,7 +27,7 @@ import pipes
 解压目录里面的字幕
 """
 
-ROOT = '/mnt/sdd1/chat_robot'
+ROOT = './'
 OUT_PUT = ROOT + '/zimu_text/'
 logging.basicConfig(filename='uncompress.log', level=logging.DEBUG)
 COUNTER = 1
