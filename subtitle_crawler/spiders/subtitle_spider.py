@@ -24,7 +24,7 @@ class SubTitleSpider(scrapy.Spider):
     allowed_domains = ["zimuku.net"]
     start_urls = []
 
-    for index in xrange(1, 3):
+    for index in xrange(1, 13000):
         next_url = origin_url % index
         start_urls.append(next_url)
 
