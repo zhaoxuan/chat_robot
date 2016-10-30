@@ -39,7 +39,7 @@ class SubTitleSpider(scrapy.Spider):
 
     def parse_detail(self, response):
         url = response.selector.xpath('//li[contains(@class, "dlsub")]/div/a/@href').extract()[0]
-        code, msg = commands.getstatusoutput('wget -q --tries=3 --directory-prefix=result/ %s' % (url))
+        code, msg = commands.getstatusoutput('wget -q --restrict-file-names=nocontrol --tries=3 --directory-prefix=result/ %s' % (url))
 
         if code != 0:
             logger.info(msg)
