@@ -13,6 +13,7 @@ reload(sys)
 sys.setdefaultencoding("utf-8")
 
 logger = logging.getLogger('SubTitleSpider')
+# 老射手字幕
 origin_url = "http://www.zimuku.net/search?q=&t=onlyst&ad=1&p=%d"
 
 
