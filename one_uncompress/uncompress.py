@@ -27,7 +27,7 @@ import pipes
 解压目录里面的字幕
 """
 
-ROOT = './'
+ROOT = '..'
 OUT_PUT = ROOT + '/zimu_text/'
 logging.basicConfig(filename='uncompress.log', level=logging.DEBUG)
 COUNTER = 1
@@ -53,8 +53,12 @@ def uncompress(file_name):
         else:
             print 'success'
     else:
-        print file_path
-        pass
+        code, msg = commands.getstatusoutput('7z x %s -p -yo%s' % (file_path, OUT_PUT))
+        if code != 0:
+            print file_path
+            logging.error(msg)
+        else:
+            print 'success'
 
 
 for root, dirs, files in os.walk(ROOT + '/result'):
