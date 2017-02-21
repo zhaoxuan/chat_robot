@@ -24,7 +24,7 @@ class SubTitleSpider(scrapy.Spider):
     allowed_domains = ["zimuku.net"]
     start_urls = []
 
-    for index in xrange(1, 1772):
+    for index in xrange(1, 1858):
         next_url = origin_url % index
         start_urls.append(next_url)
 
@@ -54,12 +54,3 @@ class SubTitleSpider(scrapy.Spider):
         if code != 0:
             logger.info(msg)
             print url
-
-    def parse_file(self, response):
-        filename = re.findall(r'attachment; filename="(.*)"', response.headers.get('Content-Disposition', ''))
-        body = response.body
-        item = SubtitleCrawlerItem()
-        item['url'] = response.url
-        item['body'] = body
-        item['filename'] = filename
-        return item

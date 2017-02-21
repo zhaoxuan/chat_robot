@@ -65,9 +65,9 @@ CONCURRENT_REQUESTS_PER_IP = 1
 
 # Configure item pipelines
 # See http://scrapy.readthedocs.org/en/latest/topics/item-pipeline.html
-ITEM_PIPELINES = {
-    'subtitle_crawler.pipelines.SubtitleCrawlerPipeline': 300,
-}
+# ITEM_PIPELINES = {
+#     'subtitle_crawler.pipelines.SubtitleCrawlerPipeline': 300,
+# }
 
 # Enable and configure the AutoThrottle extension (disabled by default)
 # See http://doc.scrapy.org/en/latest/topics/autothrottle.html
@@ -90,5 +90,5 @@ ITEM_PIPELINES = {
 # HTTPCACHE_IGNORE_HTTP_CODES = []
 # HTTPCACHE_STORAGE = 'scrapy.extensions.httpcache.FilesystemCacheStorage'
 
-LOG_LEVEL = 'INFO'
+LOG_LEVEL = 'DEBUG'
 LOG_FILE = './spider.log'
